@@ -25,65 +25,73 @@ class BookController extends ActiveController
     {
         // $http = ["REQUEST_SCHEME"] . '://';
         $behaviors = parent::behaviors();
-        // unset($behaviors['authenticator']);
+        unset($behaviors['authenticator']);
         $behaviors['corsFilter'] = [
             'class' => Cors::class,
             'cors' => [
-                // 'Origin' => ['*'],
                 'Origin' => [(isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : 'http://' . $_SERVER['REMOTE_ADDR'])],
-                'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
-                // 'Access-Control-Request-Headers' => ['content-type', 'application/json', 'Authorization'],
-                'Access-Control-Request-Headers' => ['*'],
-                // 'Access-Control-Allow-Credentials' => false,
-                'actions' => [
-
-                    'change-visibility' => [
-                        'Access-Control-Allow-Credentials' => true,
-                    ],
-
-                    'upload' => [
-                        'Access-Control-Allow-Credentials' => true,
-                    ],
-
-                    'user-books' => [
-                        'Access-Control-Allow-Credentials' => true,
-                    ],
-
-                    'user-book' => [
-                        'Access-Control-Allow-Credentials' => true,
-                    ],
-                    'delete-book' => [
-                        'Access-Control-Allow-Credentials' => true,
-                    ],
-                    'edit-book' => [
-                        'Access-Control-Allow-Credentials' => true,
-                    ],
-                    'read-book' => [
-                        'Access-Control-Allow-Credentials' => true,
-                    ],
-                    'read-book-info' => [
-                        'Access-Control-Allow-Credentials' => true,
-                    ],
-                    'user-read-book' => [
-                        'Access-Control-Allow-Credentials' => true,
-                    ],
-
-
-
-
-
-                ],
-            ],
+            ]
         ];
+        // $behaviors['corsFilter'] = [
+        //     'class' => Cors::class,
+        //     'cors' => [
+        //         // 'Origin' => ['*'],
+        //         'Origin' => [(isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : 'http://' . $_SERVER['REMOTE_ADDR'])],
+        //         'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+        //         // 'Access-Control-Request-Headers' => ['content-type', 'application/json', 'Authorization'],
+        //         'Access-Control-Request-Headers' => ['*'],
+        //         // 'Access-Control-Allow-Credentials' => true,
+        //         'actions' => [
+
+        //             'change-visibility' => [
+        //                 'Access-Control-Allow-Credentials' => true,
+        //             ],
+
+        //             'upload' => [
+        //                 'Access-Control-Allow-Credentials' => true,
+        //             ],
+
+        //             'user-books' => [
+        //                 'Access-Control-Allow-Credentials' => false,
+        //             ],
+
+        //             'user-book' => [
+        //                 'Access-Control-Allow-Credentials' => true,
+        //             ],
+        //             'delete-book' => [
+        //                 'Access-Control-Allow-Credentials' => true,
+        //             ],
+        //             'edit-book' => [
+        //                 'Access-Control-Allow-Credentials' => true,
+        //             ],
+        //             'read-book' => [
+        //                 'Access-Control-Allow-Credentials' => true,
+        //             ],
+        //             'read-book-info' => [
+        //                 'Access-Control-Allow-Credentials' => true,
+        //             ],
+        //             'user-read-book' => [
+        //                 'Access-Control-Allow-Credentials' => true,
+        //             ],
+
+
+
+
+
+        //         ],
+        //     ],
+        // ];
 
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::class,
             'optional' => ['user-books', 'user-book'],
+            'except' => ['options'],
         ];
 
         return $behaviors;
     }
 
+    
     public function actions()
     {
         $actions = parent::actions();

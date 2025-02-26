@@ -99,6 +99,8 @@ $config = [
             'rules' => [
                 'GET /' => 'site/index',
                 'GET api' => 'site/index',
+                'GET api/books' => 'api/book/user-books',
+
 
                 'OPTIONS api/registration' => 'api/user/options',
                 'OPTIONS /api/login' => 'api/user/options',
@@ -113,7 +115,6 @@ $config = [
                 
 
                 // список всех книг public + pager
-                'GET api/books' => 'api/book/user-books',
                 'GET api/books/<id:\d+>' => 'api/book/user-book',
                 
                 'POST api/registration' => 'api/user/register',
@@ -139,7 +140,17 @@ $config = [
                 'PUT api/books/<id:\d+>/change-visibility' => 'api/book/change-visibility',
                 
             ],
-        ]
+        ],
+    //     'corsFilter' => [
+    // 'class' => \yii\filters\Cors::class,
+    // 'cors' => [
+    //     'Origin' => ['*'], // You can specify more origins here
+    //     'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+    //     'Access-Control-Request-Headers' => ['*'], // You can specify the allowed headers here
+    //     'Access-Control-Allow-Credentials' => true,
+    //     'Access-Control-Max-Age' => 86400,
+    // ],
+    // ],
 
 
     ],

@@ -2,7 +2,7 @@
 
     return [
         'class' => 'yii\db\Connection',
-        'dsn' => 'mysql:host=127.0.0.1;dbname=api_books',
+        'dsn' => 'mysql:host=MariaDB-11.2;dbname=api_books',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
